@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CalculatorComponent } from './calculator/calculator.component';
 import { RouterOutlet } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent, CalculatorComponent],
@@ -18,6 +19,7 @@ import { MatInputModule } from '@angular/material/input';
     BrowserAnimationsModule,
     RouterOutlet,
     MatInputModule,
+    FormsModule,
   ],
 })
 export class AppModule {}

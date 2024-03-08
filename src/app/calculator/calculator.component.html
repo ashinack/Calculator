@@ -2,7 +2,7 @@
   <div class="calcu-main-box">
     <div class="display-sec">
       <div class="input-sec">
-        <input type="text" class="screen-calc" value="0" />
+        <input type="text" class="screen-calc" [(ngModel)]="inputValue" />
       </div>
     </div>
     <div class="button-sec">
@@ -15,31 +15,31 @@
           <div class="number-display">C</div>
           <div class="number-display">()</div>
           <div class="number-display">%</div>
-          <div class="number-display">/</div>
+          <div class="number-display" (click)="getOperator('/')">/</div>
         </div>
         <div class="each-number-sec">
-          <div class="number-display">7</div>
-          <div class="number-display">8</div>
-          <div class="number-display">9</div>
-          <div class="number-display">X</div>
+          <div class="number-display" (click)="getNumber('7')">7</div>
+          <div class="number-display" (click)="getNumber('8')">8</div>
+          <div class="number-display" (click)="getNumber('9')">9</div>
+          <div class="number-display" (click)="getOperator('*')">X</div>
         </div>
         <div class="each-number-sec">
-          <div class="number-display">4</div>
-          <div class="number-display">5</div>
-          <div class="number-display">6</div>
-          <div class="number-display">-</div>
+          <div class="number-display" (click)="getNumber('4')">4</div>
+          <div class="number-display" (click)="getNumber('5')">5</div>
+          <div class="number-display" (click)="getNumber('6')">6</div>
+          <div class="number-display" (click)="getOperator('-')">-</div>
         </div>
         <div class="each-number-sec">
-          <div class="number-display">1</div>
-          <div class="number-display">2</div>
-          <div class="number-display">3</div>
-          <div class="number-display">+</div>
+          <div class="number-display" (click)="getNumber('1')">1</div>
+          <div class="number-display" (click)="getNumber('2')">2</div>
+          <div class="number-display" (click)="getNumber('3')">3</div>
+          <div class="number-display" (click)="getOperator('+')">+</div>
         </div>
         <div class="each-number-sec">
           <div class="number-display">+/-</div>
-          <div class="number-display">0</div>
-          <div class="number-display">.</div>
-          <div class="number-display">=</div>
+          <div class="number-display" (click)="getNumber('0')">0</div>
+          <div class="number-display" (click)="getNumber('.')">.</div>
+          <div class="number-display" (click)="getOperator('=')">=</div>
         </div>
       </div>
     </div>
