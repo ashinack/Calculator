@@ -79,3 +79,12 @@ input {
   justify-content: center;
   align-items: center;
 }
+.input-display-sec {
+  width: 100%;
+  background-color: aquamarine;
+  height: 20%;
+  position: absolute;
+  bottom: 42px;
+  display: flex;
+  justify-content: flex-end;
+}

@@ -1,6 +1,10 @@
 <div class="main-content">
   <div class="calcu-main-box">
     <div class="display-sec">
+      <div class="input-display-sec">
+        {{ this.firstValue + operator + tempValue }}
+        <!-- {{ firstValue == null ? firstValue : inputValue }} -->
+      </div>
       <div class="input-sec">
         <input type="text" class="screen-calc" [(ngModel)]="inputValue" />
       </div>
@@ -8,11 +12,16 @@
     <div class="button-sec">
       <div class="icons-sec">
         <span class="material-symbols-outlined mat-icon"> history </span>
-        <span class="material-symbols-outlined mat-icon"> backspace </span>
+        <span
+          class="material-symbols-outlined mat-icon"
+          (click)="backBtnClicked()"
+        >
+          backspace
+        </span>
       </div>
       <div class="number-sec">
         <div class="each-number-sec">
-          <div class="number-display">C</div>
+          <div class="number-display" (click)="clearAll()">C</div>
           <div class="number-display">()</div>
           <div class="number-display">%</div>
           <div class="number-display" (click)="getOperator('/')">/</div>
@@ -39,7 +48,7 @@
           <div class="number-display">+/-</div>
           <div class="number-display" (click)="getNumber('0')">0</div>
           <div class="number-display" (click)="getNumber('.')">.</div>
-          <div class="number-display" (click)="getOperator('=')">=</div>
+          <div class="number-display" (click)="evaluate()">=</div>
         </div>
       </div>
     </div>
