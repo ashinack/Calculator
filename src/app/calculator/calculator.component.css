@@ -88,3 +88,20 @@ input {
   display: flex;
   justify-content: flex-end;
 }
+.history-sec {
+  /* background-color: aquamarine; */
+  background-color: #6cc6a8;
+  position: relative;
+  height: 64%;
+  padding: 10px;
+}
+.history-display-sec {
+  width: 100%;
+  height: 86%;
+  background-color: antiquewhite;
+  overflow: auto;
+}
+.histoy-btn-sec {
+  position: absolute;
+  bottom: 10px;
+}

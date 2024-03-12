@@ -11,10 +11,22 @@ export class CalculatorComponent {
   firstValue: any = '';
   tempValue: any = '';
   result: any = 0;
+  historyArray: any[] = [];
+  show: boolean = false;
 
   getNumber(num: any) {
+    console.log(this.result, 'res');
+
     if (this.inputValue === '0') {
       this.inputValue = num;
+    } else if (this.result != 0 && this.inputValue == this.result) {
+      console.log('heelo');
+
+      this.inputValue = num;
+      this.firstValue = '';
+      this.tempValue = '';
+      this.operator = '';
+      this.result = 0;
     } else {
       this.inputValue = this.inputValue + num;
     }
@@ -66,8 +78,14 @@ export class CalculatorComponent {
     }
     // this.firstValue = result;
     this.inputValue = this.result.toString();
+    this.historyArray.push({
+      first: a,
+      second: b,
+      ope: this.operator,
+      res: this.result,
+    });
 
-    console.log('a', a, 'b', b);
+    console.log(this.historyArray, 'this.historyArray');
   }
 
   clearAll() {
@@ -78,10 +96,16 @@ export class CalculatorComponent {
   }
 
   backBtnClicked() {
-    console.log('this.tempValue', this.tempValue);
     if (this.result == 0) {
       this.inputValue = this.inputValue.slice(0, this.inputValue.length - 1);
-      console.log('input', this.inputValue);
+    } else {
+      this.firstValue = '';
+      this.operator = '';
+      this.tempValue = '';
     }
+  }
+
+  historyDetails() {
+    this.show = !this.show;
   }
 }

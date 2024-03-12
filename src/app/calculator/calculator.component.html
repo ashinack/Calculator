@@ -9,9 +9,14 @@
         <input type="text" class="screen-calc" [(ngModel)]="inputValue" />
       </div>
     </div>
-    <div class="button-sec">
+    <div class="button-sec" *ngIf="show == false">
       <div class="icons-sec">
-        <span class="material-symbols-outlined mat-icon"> history </span>
+        <span
+          class="material-symbols-outlined mat-icon"
+          (click)="historyDetails()"
+        >
+          history
+        </span>
         <span
           class="material-symbols-outlined mat-icon"
           (click)="backBtnClicked()"
@@ -50,6 +55,22 @@
           <div class="number-display" (click)="getNumber('.')">.</div>
           <div class="number-display" (click)="evaluate()">=</div>
         </div>
+      </div>
+    </div>
+    <div class="history-sec" *ngIf="show">
+      <div class="history-display-sec">
+        <div>helo</div>
+        <div>helo</div>
+        <div>helo</div>
+        <div>helo</div>
+        <div>helo</div>
+        <div>helo</div>
+        <div>helo</div>
+        <div>helo</div>
+      </div>
+      <div class="histoy-btn-sec">
+        <button mat-raised-button color="primary">Clear</button>
+        <button mat-raised-button color="primary">Cancel</button>
       </div>
     </div>
   </div>
