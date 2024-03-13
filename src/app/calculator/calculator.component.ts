@@ -44,12 +44,20 @@ export class CalculatorComponent {
   }
 
   getOperator(operator: any) {
-    console.log(this.inputValue, 'this.inputValue');
+    console.log(this.tempValue, 'this.tempValue');
+
     this.tempValue = '';
 
     this.firstValue = parseFloat(this.inputValue);
+    console.log('opera', this.operator == '');
+    if (this.operator != '') {
+      console.log('kkk');
+
+      this.evaluate();
+    }
 
     this.operator = operator;
+
     this.inputValue = '';
     // console.log('op', this.operator);
 
@@ -59,10 +67,13 @@ export class CalculatorComponent {
   }
 
   evaluate() {
+    console.log('inputvalue', this.inputValue);
+
     this.tempValue = this.inputValue;
-    console.log(this.inputValue, 'op');
     const a = this.firstValue;
     const b = parseFloat(this.inputValue);
+    console.log('a', 'b', a, b);
+
     this.result;
     if (this.operator == '+') {
       this.result = a + b;
@@ -106,6 +117,14 @@ export class CalculatorComponent {
   }
 
   historyDetails() {
+    this.show = !this.show;
+  }
+
+  clearHistory() {
+    this.historyArray = [];
+  }
+
+  cancelHistory() {
     this.show = !this.show;
   }
 }

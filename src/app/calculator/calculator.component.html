@@ -59,18 +59,23 @@
     </div>
     <div class="history-sec" *ngIf="show">
       <div class="history-display-sec">
-        <div>helo</div>
-        <div>helo</div>
-        <div>helo</div>
-        <div>helo</div>
-        <div>helo</div>
-        <div>helo</div>
-        <div>helo</div>
-        <div>helo</div>
+        <h1 style="text-align: center; color: white">History</h1>
+        <!-- @for (item of historyArray; track item) {
+        <span>item.first+" "+item.ope+" "+item.second+"="+item.res</span>
+        } -->
+        <!-- @for (item of items; track item.id) { -->
+        <span style="color: white" *ngFor="let item of historyArray">
+          {{ item.first + " " + item.ope + " " + item.second + "=" + item.res }}
+        </span>
+        <!-- } -->
       </div>
       <div class="histoy-btn-sec">
-        <button mat-raised-button color="primary">Clear</button>
-        <button mat-raised-button color="primary">Cancel</button>
+        <button mat-raised-button color="primary" (click)="clearHistory()">
+          Clear
+        </button>
+        <button mat-raised-button color="primary" (click)="cancelHistory()">
+          Cancel
+        </button>
       </div>
     </div>
   </div>
