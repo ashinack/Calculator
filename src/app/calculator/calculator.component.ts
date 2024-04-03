@@ -10,33 +10,23 @@ export class CalculatorComponent {
   operator: any = '';
   firstValue: any = '';
   tempValue: any = '';
-  result: any = 0;
   historyArray: any[] = [];
   show: boolean = false;
+  displayExpression: any;
+  displayValue: any;
+  //
+  waitForSecondNumber = false;
+  firstOperand: any = null;
 
   getNumber(num: any) {
-    console.log(this.result, 'res');
-
-    if (this.inputValue === '0') {
+    if (this.waitForSecondNumber) {
       this.inputValue = num;
-    } else if (this.result != 0 && this.inputValue == this.result) {
-      console.log('heelo');
-
-      this.inputValue = num;
-      this.firstValue = '';
-      this.tempValue = '';
-      this.operator = '';
-      this.result = 0;
+      this.waitForSecondNumber = false;
     } else {
-      this.inputValue = this.inputValue + num;
+      this.inputValue === '0'
+        ? (this.inputValue = num)
+        : (this.inputValue += num);
     }
-    // if (this.inputValue != null) {
-    //   this.inputValue === '0'
-    //     ? (this.inputValue = num)
-    //     : (this.inputValue = this.inputValue + num);
-    // } else {
-    //   this.inputValue = num;
-    // }
   }
 
   valueDot() {
@@ -44,77 +34,72 @@ export class CalculatorComponent {
   }
 
   getOperator(operator: any) {
-    console.log(this.tempValue, 'this.tempValue');
+    if (this.firstOperand === null) {
+      this.firstOperand = Number(this.inputValue);
+      this.displayValue = Number(this.inputValue);
+      console.log('displayValue', this.displayValue);
 
-    this.tempValue = '';
+      this.displayExpression = this.inputValue + ' ' + operator;
+    } else if (this.operator) {
+      console.log('this.inputValue', this.inputValue);
 
-    this.firstValue = parseFloat(this.inputValue);
-    console.log('opera', this.operator == '');
-    if (this.operator != '') {
-      console.log('kkk');
-
-      this.evaluate();
+      let result = this.evaluate(this.operator, Number(this.inputValue));
+      if (operator == '=') {
+        console.log('displayValue-else-if', this.displayValue);
+        this.displayExpression =
+          this.displayValue + ' ' + this.operator + ' ' + this.inputValue;
+        this.inputValue = String(result);
+      } else {
+        this.displayExpression = result + ' ' + operator;
+        this.inputValue = 0;
+      }
+      this.inputValue = String(result);
+      // this.firstOperand = result;
     }
-
     this.operator = operator;
-
-    this.inputValue = '';
-    // console.log('op', this.operator);
-
-    // if (this.inputValue != null) {
-    //   this.inputValue = this.inputValue + operator;
-    // }
+    this.waitForSecondNumber = true;
   }
 
-  evaluate() {
-    console.log('inputvalue', this.inputValue);
+  evaluate(operator: any, secondOp: any) {
+    switch (operator) {
+      case '+':
+        console.log('hiii');
 
-    this.tempValue = this.inputValue;
-    const a = this.firstValue;
-    const b = parseFloat(this.inputValue);
-    console.log('a', 'b', a, b);
-
-    this.result;
-    if (this.operator == '+') {
-      this.result = a + b;
+        return (this.firstOperand += secondOp);
+      case '-':
+        console.log('hello');
+        return (this.firstOperand -= secondOp);
+      case '*':
+        return (this.firstOperand *= secondOp);
+      case '/':
+        return (this.firstOperand /= secondOp);
+      case '=':
+        return secondOp;
     }
-    if (this.operator == '*') {
-      this.result = a * b;
-    }
-    if (this.operator == '-') {
-      this.result = a - b;
-    }
-    if (this.operator == '/') {
-      this.result = a / b;
-    }
-    // this.firstValue = result;
-    this.inputValue = this.result.toString();
-    this.historyArray.push({
-      first: a,
-      second: b,
-      ope: this.operator,
-      res: this.result,
-    });
-
-    console.log(this.historyArray, 'this.historyArray');
+    // this.historyArray.push({
+    //   first: a,
+    //   second: b,
+    //   ope: this.operator,
+    //   res: this.result,
+    // });
   }
 
   clearAll() {
-    this.tempValue = '';
-    this.firstValue = '';
     this.inputValue = '0';
-    this.operator = '';
+    this.firstOperand = null;
+    this.operator = null;
+    this.waitForSecondNumber = false;
   }
 
-  backBtnClicked() {
-    if (this.result == 0) {
-      this.inputValue = this.inputValue.slice(0, this.inputValue.length - 1);
-    } else {
-      this.firstValue = '';
-      this.operator = '';
-      this.tempValue = '';
-    }
-  }
+  // backBtnClicked() {
+  //   if (this.result == 0) {
+  //     this.inputValue = this.inputValue.slice(0, this.inputValue.length - 1);
+  //   } else {
+  //     this.firstValue = '';
+  //     this.operator = '';
+  //     this.tempValue = '';
+  //   }
+  // }
 
   historyDetails() {
     this.show = !this.show;

@@ -2,7 +2,10 @@
   <div class="calcu-main-box">
     <div class="display-sec">
       <div class="input-display-sec">
-        {{ this.firstValue + operator + tempValue }}
+        <span>
+          {{ displayExpression }}
+        </span>
+
         <!-- {{ firstValue == null ? firstValue : inputValue }} -->
       </div>
       <div class="input-sec">
@@ -17,12 +20,7 @@
         >
           history
         </span>
-        <span
-          class="material-symbols-outlined mat-icon"
-          (click)="backBtnClicked()"
-        >
-          backspace
-        </span>
+        <span class="material-symbols-outlined mat-icon"> backspace </span>
       </div>
       <div class="number-sec">
         <div class="each-number-sec">
@@ -53,7 +51,7 @@
           <div class="number-display">+/-</div>
           <div class="number-display" (click)="getNumber('0')">0</div>
           <div class="number-display" (click)="getNumber('.')">.</div>
-          <div class="number-display" (click)="evaluate()">=</div>
+          <div class="number-display" (click)="getOperator('=')">=</div>
         </div>
       </div>
     </div>
