@@ -14,12 +14,16 @@ export class CalculatorComponent {
   show: boolean = false;
   displayExpression: any;
   displayValue: any;
+  operatorCall = false;
+  result: any;
   //
   waitForSecondNumber = false;
   firstOperand: any = null;
+  displayFirstop: any;
 
   getNumber(num: any) {
     if (this.waitForSecondNumber) {
+      this.displayValue = num;
       this.inputValue = num;
       this.waitForSecondNumber = false;
     } else {
@@ -36,38 +40,36 @@ export class CalculatorComponent {
   getOperator(operator: any) {
     if (this.firstOperand === null) {
       this.firstOperand = Number(this.inputValue);
-      this.displayValue = Number(this.inputValue);
-      console.log('displayValue', this.displayValue);
+      this.displayFirstop = Number(this.inputValue);
 
       this.displayExpression = this.inputValue + ' ' + operator;
     } else if (this.operator) {
-      console.log('this.inputValue', this.inputValue);
-
-      let result = this.evaluate(this.operator, Number(this.inputValue));
-      if (operator == '=') {
-        console.log('displayValue-else-if', this.displayValue);
-        this.displayExpression =
-          this.displayValue + ' ' + this.operator + ' ' + this.inputValue;
-        this.inputValue = String(result);
-      } else {
-        this.displayExpression = result + ' ' + operator;
-        this.inputValue = 0;
+      if (this.waitForSecondNumber == true) {
+        this.displayFirstop = Number(this.inputValue);
       }
-      this.inputValue = String(result);
-      // this.firstOperand = result;
+
+      if (this.waitForSecondNumber == false) {
+        this.result = this.evaluate(this.operator, Number(this.inputValue));
+      }
+      if (operator == '=') {
+        this.displayExpression =
+          this.displayFirstop + ' ' + this.operator + ' ' + this.displayValue;
+      } else {
+        this.displayExpression = this.result + ' ' + operator;
+      }
+
+      this.inputValue = String(this.result);
     }
     this.operator = operator;
     this.waitForSecondNumber = true;
+    console.log(this.firstOperand, operator, this.inputValue, '=', this.result);
   }
 
   evaluate(operator: any, secondOp: any) {
     switch (operator) {
       case '+':
-        console.log('hiii');
-
         return (this.firstOperand += secondOp);
       case '-':
-        console.log('hello');
         return (this.firstOperand -= secondOp);
       case '*':
         return (this.firstOperand *= secondOp);
@@ -76,30 +78,23 @@ export class CalculatorComponent {
       case '=':
         return secondOp;
     }
-    // this.historyArray.push({
-    //   first: a,
-    //   second: b,
-    //   ope: this.operator,
-    //   res: this.result,
-    // });
   }
 
   clearAll() {
     this.inputValue = '0';
     this.firstOperand = null;
     this.operator = null;
+    this.displayExpression = null;
     this.waitForSecondNumber = false;
   }
 
-  // backBtnClicked() {
-  //   if (this.result == 0) {
-  //     this.inputValue = this.inputValue.slice(0, this.inputValue.length - 1);
-  //   } else {
-  //     this.firstValue = '';
-  //     this.operator = '';
-  //     this.tempValue = '';
-  //   }
-  // }
+  backBtnClicked() {
+    if (this.operator != '=') {
+      this.inputValue = this.inputValue.slice(0, this.inputValue.length - 1);
+    } else {
+      this.displayExpression = null;
+    }
+  }
 
   historyDetails() {
     this.show = !this.show;
