@@ -30,6 +30,9 @@ export class CalculatorComponent {
       this.inputValue === '0'
         ? (this.inputValue = num)
         : (this.inputValue += num);
+      this.inputValue === '0'
+        ? (this.displayValue = num)
+        : (this.displayValue += num);
     }
   }
 
@@ -56,13 +59,19 @@ export class CalculatorComponent {
           this.displayFirstop + ' ' + this.operator + ' ' + this.displayValue;
       } else {
         this.displayExpression = this.result + ' ' + operator;
+        this.historyArray.push({
+          first: this.displayFirstop,
+          ope: operator,
+          second: this.inputValue,
+          res: this.result,
+        });
       }
 
       this.inputValue = String(this.result);
     }
     this.operator = operator;
     this.waitForSecondNumber = true;
-    console.log(this.firstOperand, operator, this.inputValue, '=', this.result);
+    console.log(this.historyArray, 'jjj');
   }
 
   evaluate(operator: any, secondOp: any) {
