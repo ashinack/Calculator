@@ -52,19 +52,23 @@ export class CalculatorComponent {
       }
 
       if (this.waitForSecondNumber == false) {
+        // this.displayExpression =
+        //   this.firstOperand + ' ' + this.operator + ' ' + this.inputValue;
+        this.historyArray.push({
+          first: this.firstOperand,
+          ope: this.operator,
+          second: this.inputValue,
+        });
         this.result = this.evaluate(this.operator, Number(this.inputValue));
+        const lastItemIndex = this.historyArray.length - 1;
+        const lastItem = this.historyArray[lastItemIndex];
+        lastItem.res = this.result;
       }
       if (operator == '=') {
         this.displayExpression =
           this.displayFirstop + ' ' + this.operator + ' ' + this.displayValue;
       } else {
         this.displayExpression = this.result + ' ' + operator;
-        this.historyArray.push({
-          first: this.displayFirstop,
-          ope: operator,
-          second: this.inputValue,
-          res: this.result,
-        });
       }
 
       this.inputValue = String(this.result);

@@ -5,8 +5,6 @@
         <span>
           {{ displayExpression }}
         </span>
-
-        <!-- {{ firstValue == null ? firstValue : inputValue }} -->
       </div>
       <div class="input-sec">
         <input type="text" class="screen-calc" [(ngModel)]="inputValue" />
@@ -63,14 +61,10 @@
     <div class="history-sec" *ngIf="show">
       <div class="history-display-sec">
         <h1 style="text-align: center; color: white">History</h1>
-        <!-- @for (item of historyArray; track item) {
-        <span>item.first+" "+item.ope+" "+item.second+"="+item.res</span>
-        } -->
-        <!-- @for (item of items; track item.id) { -->
+
         <span style="color: white" *ngFor="let item of historyArray">
           {{ item.first + " " + item.ope + " " + item.second + "=" + item.res }}
         </span>
-        <!-- } -->
       </div>
       <div class="histoy-btn-sec">
         <button mat-raised-button color="primary" (click)="clearHistory()">
