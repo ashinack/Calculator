@@ -5,7 +5,7 @@ import { CalculatorComponent } from './calculator/calculator.component';
 const routes: Routes = [{ path: '', component: CalculatorComponent }];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
